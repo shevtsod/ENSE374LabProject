@@ -1,5 +1,4 @@
-
-# ENSE 374 Lab Project
+# ENSE374 Lab Project
 Animal habitat simulation project for ENSE374 lab
 ##Overview
 TBA
