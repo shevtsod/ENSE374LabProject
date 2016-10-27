@@ -1,11 +1,8 @@
 
-# ENSE374
-My solutions to labs in ENSE 374 - Software Project Management.
+# ENSE 374 Lab Project
+Animal habitat simulation project for ENSE374 lab
 ##Overview
-> **Lab 1** - Introduction to Java  
-> **Lab 2** - Introduction to Java in an IDE (Eclipse)  
-> **Lab 3** - Introduction to Version Control (Git)  
-> **Lab 4** - Animal Habitat Simulation Project - Requirements & Design
+TBA
 
 ##Compilation
 ###Eclipse IDE for Java Neon.1
@@ -44,20 +41,7 @@ directory where you created the project. This will automatically update the
 project files in the IDE. Press `F6` to run or `Ctrl + F5` to debug.
 
 ##Details
-###Lab 1 - Introduction to Java
-Using a text editor, a class `SavingsAccount` was created to hold a bank savings account with monthly compounding interest. It was tested using a class `Bank` and saved as Phase 1. In Phase 2, another implementation of `SavingsAccount` with bi-weekly compounding interest was tested using the same Bank class.
-
-###Lab 2 - Introduction to Java in an IDE (Eclipse)
-Using any Java IDE (Eclipse), a class `Employee` was created to hold information for an employee to be tested in a class `Interface`. Instances of `Employee` were placed in an array and populated with data from a file containing randomly generated entries `RandomData.csv` (generated using [generatedata.com](http://www.generatedata.com/))
-
-###Lab 3 - Introduction to Version Control (Git) 
-Introduction to version control using command-line `Git`, the Windows shell interface [TortoiseGit](https://tortoisegit.org/), and `GitHub`. Classes `ListElement` and `LinkedList` were created in Phase 1 to implement a single linked list to become familiar with revision control on `GitHub`. In Phase 2, a branch `doubleLinkedList` was created to modify the linked list and implement a double linked list.
-
-###Lab 4 - Animal Habitat Simulation Project - Requirements & Design
-See repository `ENSE374LabProject`.  
-
+###Lab 4
 Creation of `Software Design Diagram`, `UML Class Diagram`, and coding of class and method stubs for an animal habitat simulation software project.
-
-...
 
 > Written with [StackEdit](https://stackedit.io/).
