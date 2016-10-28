@@ -1,6 +1,5 @@
 /**
- * <h1>shevtsod</h1>
- * Contains implementations for the following:
+ * <p>Contains implementations for the following:</p>
  * <ul>
  *     <li>enum Organism</li>
  *     <li>enum Organism</li>
@@ -29,6 +28,7 @@
  *     <li>class BoardManager</li>
  *
  * </ul>
+ *
  * @author Daniel Shevtsov
  */
 package com.shevtsod;

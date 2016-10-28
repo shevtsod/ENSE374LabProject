@@ -2,7 +2,7 @@ package com.shevtsod.Organism;
 
 /**
  * <p>
- *     Contains all legal Animal diets.
+ *     Defines all legal Animal diets.
  * </p>
  *
  * @author Daniel Shevtsov

@@ -2,7 +2,7 @@ package com.shevtsod.Organism;
 
 /**
  * <p>
- *     Contains all legal organism names for the animal habitat simulator.
+ *     Defines all legal organism names for the animal habitat simulator.
  * </p>
  *
  * @author Daniel Shevtsov
