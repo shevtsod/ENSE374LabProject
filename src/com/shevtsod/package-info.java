@@ -1,5 +1,7 @@
 /**
- * <p>Contains implementations for the following:</p>
+ * <p>Contains all classes required to implement the animal habitat
+ * simulation program. Contains implementations for the
+ * following:</p>
  * <ul>
  *     <li>enum Organism</li>
  *     <li>enum Organism</li>
