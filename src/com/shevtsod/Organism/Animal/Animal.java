@@ -1,10 +1,6 @@
 package com.shevtsod.Organism.Animal;
 
 /**
- * <h1>
- *     Animal
- * </h1>
- *
  * <p>
  *     A generic animal for the animal habitat simulator. Cannot be
  *     instantiated.

@@ -1,10 +1,6 @@
 package com.shevtsod.Organism;
 
 /**
- * <h1>
- *     TypeOrganism
- * </h1>
- *
  * <p>
  *     Contains all legal organism names for the animal habitat simulator.
  * </p>
