@@ -7,9 +7,13 @@
 package com;
 
 /**
- * class Main
+ * <h1>
+ *     Main
+ * </h1>
  *
- * Serves as primary entry point for program.
+ * <p>
+ *     The primary entry point for the program
+ * </p>
  *
  * @author Daniel Shevtsov
  */
