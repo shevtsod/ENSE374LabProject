@@ -9,8 +9,8 @@ package com.shevtsod.Organism;
  * @author Daniel Shevtsov
  */
 public interface Organism {
-    public int getPosX();
-    public int getPosY();
-    public TypeOrganism getType();
-    public boolean eats(Organism targetOrganism);
+    int getPosX();
+    int getPosY();
+    TypeOrganism getType();
+    boolean eats(Organism targetOrganism);
 }

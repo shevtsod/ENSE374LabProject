@@ -1,5 +1,7 @@
 package com.shevtsod.Organism.Vegetation;
 
+import com.shevtsod.Organism.Organism;
+
 /**
  * <p>
  *     Generic vegetation for the animal habitat simulator. Cannot be
@@ -8,6 +10,6 @@ package com.shevtsod.Organism.Vegetation;
  *
  * @author Daniel Shevtsov
  */
-public abstract class Vegetation {
+public abstract class Vegetation implements Organism {
     //TODO: Add Vegetation
 }

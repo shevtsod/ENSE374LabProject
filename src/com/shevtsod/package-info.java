@@ -4,31 +4,24 @@
  *     simulation program. Contains implementations for the following:
  * </p>
  * <ul>
- *     <li>enum Organism</li>
- *     <li>enum Organism</li>
+ *     <li>enum TypeDiet</li>
+ *     <li>enum TypeOrganism</li>
  *     <li>
  *         interface Organism
  *         <ul>
  *             <li>
- *                 class Animal
- *                 <ul>
- *                     <li>Various animals sorted into Carnivore, Omnivore,
- *                     and Herbivore
- *                     </li>
- *                 </ul>
+ *                 abstract class Animal
  *             </li>
  *             <li>
- *                 class Vegetation
- *                 <ul>
- *                     <li>
- *                         Various vegetation classes
- *                     </li>
- *                 </ul>
- *
+ *                 abstract class Vegetation
  *             </li>
  *         </ul>
  *     </li>
  *     <li>class BoardManager</li>
+ *     <li>
+ *         Various concrete animals and vegitation classes extending the
+ *         Animal/Vegitation classes
+ *     </li>
  *
  * </ul>
  *

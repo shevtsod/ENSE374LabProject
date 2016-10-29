@@ -1,5 +1,7 @@
 package com.shevtsod.Organism.Animal;
 
+import com.shevtsod.Organism.Organism;
+
 /**
  * <p>
  *     A generic animal for the animal habitat simulator. Cannot be
@@ -8,6 +10,6 @@ package com.shevtsod.Organism.Animal;
  *
  * @author Daniel Shevtsov
  */
-public abstract class Animal {
-    //TODO: Add animal
+public abstract class Animal implements Organism {
+    //TODO: Add Animal
 }
