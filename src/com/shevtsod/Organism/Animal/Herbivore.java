@@ -9,5 +9,5 @@ package com.shevtsod.Organism.Animal;
  * @author Daniel Shevtsov
  */
 public abstract class Herbivore extends Animal {
-    //TODO: Add Carnivore
+    //TODO: Add Herbivore
 }

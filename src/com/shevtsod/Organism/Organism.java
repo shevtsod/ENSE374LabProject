@@ -11,6 +11,6 @@ package com.shevtsod.Organism;
 public interface Organism {
     int getPosX();
     int getPosY();
-    TypeOrganism getType();
+    TypeOrganism getOrganism();
     boolean eats(Organism targetOrganism);
 }

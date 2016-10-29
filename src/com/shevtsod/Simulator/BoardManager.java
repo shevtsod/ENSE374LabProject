@@ -41,7 +41,7 @@ public class BoardManager {
      * @param targetOrganism An object inheriting from Organism
      */
     public void addOrganism(Organism targetOrganism) {
-
+        //TODO: Add addOrganism()
     }
 
     public void simulate() {
@@ -52,5 +52,13 @@ public class BoardManager {
         System.out.println("sizeY: " + sizeY);
         System.out.println("numOrganisms: " + numOrganisms);
         System.out.println("listOrganisms.size: " + listOrganisms.size());
+    }
+
+    /**
+     * Prints the current board visually to the console. Can only be
+     * called by the class.
+     */
+    private void printBoard() {
+        //TODO: Add printBoard()
     }
 }
