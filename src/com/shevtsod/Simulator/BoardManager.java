@@ -29,9 +29,10 @@ public class BoardManager {
         listOrganisms = new LinkedList();
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        numOrganisms = 0;
 
         //Pass program control to simulate() function
-        simulate()
+        simulate();
     }
 
     /**
@@ -45,5 +46,11 @@ public class BoardManager {
 
     public void simulate() {
         //TODO: Remove debug comments, implement simulate()
+        //Test that everything works up to this point
+        System.out.println("Simulation running:");
+        System.out.println("sizeX: " + sizeX);
+        System.out.println("sizeY: " + sizeY);
+        System.out.println("numOrganisms: " + numOrganisms);
+        System.out.println("listOrganisms.size: " + listOrganisms.size());
     }
 }

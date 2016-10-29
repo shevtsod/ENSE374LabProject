@@ -4,8 +4,6 @@
  * AUTHOR:          Daniel Shevtsov
  */
 
-package com;
-
 import com.shevtsod.Simulator.BoardManager;
 import java.util.Scanner;
 
@@ -32,13 +30,21 @@ public class Main {
 
         do {
             System.out.print("Enter number of horizontal cells: ");
-        } while(!input.hasNextInt());
-        sizeX = input.nextInt();
+            if(input.hasNextInt()) {
+                sizeX = input.nextInt();
+            } else {
+                input.nextLine();
+            }
+        } while(sizeX == 0);
 
         do {
             System.out.print("Enter number of vertical cells: ");
-        } while(!input.hasNextInt());
-        sizeY = input.nextInt();
+            if(input.hasNextInt()) {
+                sizeY = input.nextInt();
+            } else {
+                input.nextLine();
+            }
+        } while(sizeY == 0);
 
         //Pass control of the program to the BoardManager
         BoardManager mainBM = new BoardManager(sizeX, sizeY);
