@@ -1,6 +1,9 @@
 package com.shevtsod.Simulator;
 
-import com.shevtsod.Organism.Organism;
+import com.shevtsod.Organism.ConcreteClasses.Animals.*;
+import com.shevtsod.Organism.*;
+import com.shevtsod.Organism.Animal.*;
+import com.shevtsod.Organism.Vegetation.*;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -16,8 +19,9 @@ import java.util.List;
  * @author Daniel Shevtsov
  */
 public class BoardManager {
-    private int sizeX, sizeY, numOrganisms;
-    private List listOrganisms;
+    private int sizeX;
+    private int sizeY;
+    private List<Organism> listOrganisms;
 
     /**
      * Creates an empty board of size given by sizeX (# of horizontal cells)
@@ -26,10 +30,9 @@ public class BoardManager {
      * @param sizeY Number of vertical cells
      */
     public BoardManager(int sizeX, int sizeY) {
-        listOrganisms = new LinkedList();
+        listOrganisms = new LinkedList<Organism>();
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        numOrganisms = 0;
 
         //Pass program control to simulate() function
         simulate();
@@ -41,17 +44,27 @@ public class BoardManager {
      * @param targetOrganism An object inheriting from Organism
      */
     public void addOrganism(Organism targetOrganism) {
-        //TODO: Add addOrganism()
+        listOrganisms.add(targetOrganism);
     }
 
     public void simulate() {
         //TODO: Remove debug comments, implement simulate()
         //Test that everything works up to this point
-        System.out.println("Simulation running:");
+        System.out.println("\nInitialized BoardManager");
         System.out.println("sizeX: " + sizeX);
         System.out.println("sizeY: " + sizeY);
-        System.out.println("numOrganisms: " + numOrganisms);
         System.out.println("listOrganisms.size: " + listOrganisms.size());
+
+        Animal bj1 = new Bluejay(0, 0);
+        addOrganism(bj1);
+        System.out.println("\nAdded Bluejay");
+        System.out.println("TypeOrganism: " + bj1.getOrganism());
+        System.out.println("TypeDiet: " + bj1.getDiet());
+        System.out.println("Position: " + bj1.getPosX() + " " + bj1.getPosY());
+        System.out.println("listOrganisms.size: " + listOrganisms.size());
+
+        System.out.println("Exiting.");
+
     }
 
     /**
