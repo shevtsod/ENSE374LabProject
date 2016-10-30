@@ -15,13 +15,13 @@
  *             <li>
  *                 abstract class Vegetation
  *             </li>
+ *             <li>
+ *                  Various concrete animals and vegitation classes extending the
+ *                  Animal/Vegitation classes
+ *              </li>
  *         </ul>
  *     </li>
  *     <li>class BoardManager</li>
- *     <li>
- *         Various concrete animals and vegitation classes extending the
- *         Animal/Vegitation classes
- *     </li>
  *
  * </ul>
  *

@@ -1,6 +1,7 @@
 package com.shevtsod.Simulator;
 
 import com.shevtsod.Organism.ConcreteClasses.Animals.*;
+import com.shevtsod.Organism.ConcreteClasses.Vegetation.*;
 import com.shevtsod.Organism.*;
 import com.shevtsod.Organism.Animal.*;
 import com.shevtsod.Organism.Vegetation.*;
@@ -61,6 +62,13 @@ public class BoardManager {
         System.out.println("TypeOrganism: " + bj1.getOrganism());
         System.out.println("TypeDiet: " + bj1.getDiet());
         System.out.println("Position: " + bj1.getPosX() + " " + bj1.getPosY());
+        System.out.println("listOrganisms.size: " + listOrganisms.size());
+
+        Vegetation sh1 = new Shrub(1, 1);
+        addOrganism(sh1);
+        System.out.println("\nAdded Shrub");
+        System.out.println("TypeOrganism: " + sh1.getOrganism());
+        System.out.println("Position: " + sh1.getPosX() + " " + sh1.getPosY());
         System.out.println("listOrganisms.size: " + listOrganisms.size());
 
         System.out.println("Exiting.");

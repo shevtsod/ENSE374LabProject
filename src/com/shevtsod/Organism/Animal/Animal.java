@@ -11,27 +11,36 @@ import com.shevtsod.Organism.*;
  * @author Daniel Shevtsov
  */
 public abstract class Animal implements Organism {
-    protected int posX;
-    protected int posY;
+    private int posX;
+    private int posY;
     protected int speed;
     protected int maxHunger;
-    protected int currentHunger;
+    private int currentHunger;
     protected TypeOrganism organism;
     protected TypeDiet diet;
 
     /**
-     * Constructor for Animal. Used for Constructor chaining to children of
-     * Animal.
+     * Constructor for Animal - initializes member variables.
+     * @param posX initial x coordinate
+     * @param posY initial y coordinate
      */
-    public Animal() {
-        //Nothing here yet, may be extended in the future.
+    public Animal(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+        this.currentHunger = 0;
+
+        //The properties below may be overriden by children's constructors.
+        this.speed = 3;
+        this.maxHunger = 5;
     }
 
     /**
      * Causes an animal to move (change its x and y positions). Call
      * getPosX() and getPosY() after this method to retrieve the new position.
+     * @param maxX maximum x coordinate allowed
+     * @param maxY maximum y coordinate allowed
      */
-    public void move() {
+    public void move(int maxX, int maxY) {
         //TODO: Add move()
     }
 

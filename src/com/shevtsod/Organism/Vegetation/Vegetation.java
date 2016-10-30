@@ -12,9 +12,19 @@ import com.shevtsod.Organism.TypeOrganism;
  * @author Daniel Shevtsov
  */
 public abstract class Vegetation implements Organism {
-    protected int posX;
-    protected int posY;
+    private int posX;
+    private int posY;
     protected TypeOrganism organism;
+
+    /**
+     * Constructor for Vegetation - initializes member variables.
+     * @param posX initial x coordinate
+     * @param posY initial y coordinate
+     */
+    public Vegetation(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
+    }
 
     //Implementations for methods from Organism:
 
