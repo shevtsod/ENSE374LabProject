@@ -6,9 +6,6 @@ import com.shevtsod.Organism.*;
 import com.shevtsod.Organism.Animal.*;
 import com.shevtsod.Organism.Vegetation.*;
 
-import java.util.LinkedList;
-import java.util.List;
-
 /**
  * <p>
  *     Controls the simulation loop for the animal habitat simulator.
@@ -22,7 +19,8 @@ import java.util.List;
 public class BoardManager {
     private int sizeX;
     private int sizeY;
-    private List<Organism> listOrganisms;
+    private int numOrganisms;
+    private Organism[][] board;
 
     /**
      * Creates an empty board of size given by sizeX (# of horizontal cells)
@@ -31,21 +29,30 @@ public class BoardManager {
      * @param sizeY Number of vertical cells
      */
     public BoardManager(int sizeX, int sizeY) {
-        listOrganisms = new LinkedList<Organism>();
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        numOrganisms = 0;
+        board = new Organism[sizeX][sizeY];
 
         //Pass program control to simulate() function
         simulate();
     }
 
     /**
-     * Adds any class that implements Organism to the list of organisms in
-     * the simulation.
+     * Adds any class that implements Organism to the board of organisms in
+     * the simulation. Returns false if organism cannot be added.
      * @param targetOrganism An object inheriting from Organism
+     * @return true if Organism was added
      */
-    public void addOrganism(Organism targetOrganism) {
-        listOrganisms.add(targetOrganism);
+    public boolean addOrganism(Organism targetOrganism) {
+    	//If there is already an organism in this cell, return false.
+    	if(board[targetOrganism.getPosX()][targetOrganism.getPosY()] != null) {
+    		return false;
+    	}
+    	
+    	board[targetOrganism.getPosX()][targetOrganism.getPosY()] = targetOrganism;
+        numOrganisms++;
+        return true;
     }
 
     public void simulate() {
@@ -54,22 +61,26 @@ public class BoardManager {
         System.out.println("\nInitialized BoardManager");
         System.out.println("sizeX: " + sizeX);
         System.out.println("sizeY: " + sizeY);
-        System.out.println("listOrganisms.size: " + listOrganisms.size());
+        System.out.println("numOrganisms: " + numOrganisms);
+        System.out.println("board[0][0]: " + board[0][0]);
+        System.out.println("board[1][1]: " + board[1][1] + "\n");
 
-        Animal bj1 = new Bluejay(0, 0);
-        addOrganism(bj1);
+        Animal temp = new Bluejay(0, 0);
+        addOrganism(temp);
         System.out.println("\nAdded Bluejay");
-        System.out.println("TypeOrganism: " + bj1.getOrganism());
-        System.out.println("TypeDiet: " + bj1.getDiet());
-        System.out.println("Position: " + bj1.getPosX() + " " + bj1.getPosY());
-        System.out.println("listOrganisms.size: " + listOrganisms.size());
+        System.out.println("TypeOrganism: " + temp.getOrganism());
+        System.out.println("TypeDiet: " + temp.getDiet());
+        System.out.println("Position: " + temp.getPosX() + " " + temp.getPosY());
+        System.out.println("numOrganisms: " + numOrganisms);
+        System.out.println("board[0][0]: " + board[0][0]);
 
-        Vegetation sh1 = new Shrub(1, 1);
-        addOrganism(sh1);
+        Vegetation temp2 = new Shrub(1, 1);
+        addOrganism(temp2);
         System.out.println("\nAdded Shrub");
-        System.out.println("TypeOrganism: " + sh1.getOrganism());
-        System.out.println("Position: " + sh1.getPosX() + " " + sh1.getPosY());
-        System.out.println("listOrganisms.size: " + listOrganisms.size());
+        System.out.println("TypeOrganism: " + temp2.getOrganism());
+        System.out.println("Position: " + temp2.getPosX() + " " + temp2.getPosY());
+        System.out.println("numOrganisms: " + numOrganisms);
+        System.out.println("board[1][1]: " + board[1][1]);
 
         System.out.println("Exiting.");
 

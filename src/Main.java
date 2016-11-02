@@ -48,5 +48,7 @@ public class Main {
 
         //Pass control of the program to the BoardManager
         BoardManager mainBM = new BoardManager(sizeX, sizeY);
+        
+        input.close();
     }
 }
