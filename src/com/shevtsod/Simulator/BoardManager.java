@@ -2,6 +2,9 @@ package com.shevtsod.Simulator;
 
 import com.shevtsod.Organism.ConcreteClasses.Animals.*;
 import com.shevtsod.Organism.ConcreteClasses.Vegetation.*;
+
+import java.util.Scanner;
+
 import com.shevtsod.Organism.*;
 import com.shevtsod.Organism.Animal.*;
 import com.shevtsod.Organism.Vegetation.*;
@@ -62,6 +65,24 @@ public class BoardManager {
      * The program logic and simulation loop are processed here.
      */
     public void simulate() {
+    	char userInput;
+    	boolean correctInput;
+    	
+    	Scanner input = new Scanner(System.in);
+    	
+    	//Allow user to either use default setup, or configure the simulation.
+    	System.out.println("Press 0 for default simulation settings, 1 to configure settings");
+    	correctInput = false;
+    	do {
+    		System.out.print("INPUT: ");
+    		userInput = input.nextLine().charAt(0);
+    		if(userInput == '0' || userInput == '1') {
+    			correctInput = true;
+    		} else {
+    			System.out.println("ERROR: Invalid action");
+    		}
+    	} while(!correctInput);
+    	
         //TODO: Remove debug comments, implement simulate()
         //Test that everything works up to this point
         System.out.println("\nInitialized BoardManager");
@@ -94,6 +115,7 @@ public class BoardManager {
         	System.out.println("Could not add new Shrub. Space is already used.");
         }
 
+        input.close();
         System.out.println("Exiting.");
 
     }

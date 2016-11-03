@@ -25,26 +25,66 @@ public class Main {
     public static void main(String[] args) {
         int     sizeX = 0,
                 sizeY = 0;
+        boolean correctInput;
+        
+    	//Print welcome screen.
+        //Generated using http://patorjk.com/software/taag/
+    	System.out.println(
+    			"\n" +
+    			"*****************************************************************\n" +
+    			"    / \\   _ __ (_)_ __ ___   __ _| / ___|(_)_ __ ___  \n" +
+    			"   / _ \\ | '_ \\| | '_ ` _ \\ / _` | \\___ \\| | '_ ` _ \\ \n" +
+    			"  / ___ \\| | | | | | | | | | (_| | |___) | | | | | | |\n" +
+    			" /_/   \\_\\_| |_|_|_| |_| |_|\\__,_|_|____/|_|_| |_| |_|\n" +
+    			"Animal Habitat Simulator created by Daniel Shevtsov for ENSE 374" +
+    			"\n*****************************************************************\n"
+    			);
 
         Scanner input = new Scanner(System.in);
 
+        System.out.println("Enter number of horizontal cells: ");
+        correctInput = false;
         do {
-            System.out.print("Enter number of horizontal cells: ");
+        	System.out.print("INPUT: ");
             if(input.hasNextInt()) {
                 sizeX = input.nextInt();
+                if(sizeX >= 5 && sizeX <= 20) {
+                	correctInput = true;
+                } else {
+                	System.out.println(
+                			"ERROR: The value given for number of horizontal cells " +
+                			"must be between 0 and 20"
+                			);
+                }
             } else {
+            	System.out.println(
+            			"ERROR: Invalid input for number of horizontal cells"
+            			);
                 input.nextLine();
             }
-        } while(sizeX == 0);
+        } while(!correctInput);
 
+        System.out.println("Enter number of vertical cells: ");
+        correctInput = false;
         do {
-            System.out.print("Enter number of vertical cells: ");
+        	System.out.print("INPUT: ");
             if(input.hasNextInt()) {
                 sizeY = input.nextInt();
+                if(sizeY >= 5 && sizeX <= 20) {
+                	correctInput = true;
+                } else {
+                	System.out.println(
+                			"ERROR: The value given for number of vertical cells" +
+                			"must be between 0 and 20"
+                			);
+                }
             } else {
+            	System.out.println(
+            			"ERROR: Invalid input for number of vertical cells"
+            			);
                 input.nextLine();
             }
-        } while(sizeY == 0);
+        } while(!correctInput);
 
         //Pass control of the program to the BoardManager
         BoardManager mainBM = new BoardManager(sizeX, sizeY);
