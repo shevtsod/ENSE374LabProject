@@ -20,6 +20,7 @@ public class BoardManager {
     private int sizeX;
     private int sizeY;
     private int numOrganisms;
+    private int freeCells;
     private Organism[][] board;
 
     /**
@@ -32,6 +33,7 @@ public class BoardManager {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         numOrganisms = 0;
+        freeCells = sizeX * sizeY;
         board = new Organism[sizeX][sizeY];
 
         //Pass program control to simulate() function
@@ -55,6 +57,10 @@ public class BoardManager {
         return true;
     }
 
+    /**
+     * Function as 'main()' for the program. 
+     * The program logic and simulation loop are processed here.
+     */
     public void simulate() {
         //TODO: Remove debug comments, implement simulate()
         //Test that everything works up to this point
@@ -72,7 +78,7 @@ public class BoardManager {
         System.out.println("TypeDiet: " + temp.getDiet());
         System.out.println("Position: " + temp.getPosX() + " " + temp.getPosY());
         System.out.println("numOrganisms: " + numOrganisms);
-        System.out.println("board[0][0]: " + board[0][0]);
+        System.out.println("board[0][0]: " + board[0][0] + "\n");
 
         Vegetation temp2 = new Shrub(1, 1);
         addOrganism(temp2);
@@ -80,7 +86,13 @@ public class BoardManager {
         System.out.println("TypeOrganism: " + temp2.getOrganism());
         System.out.println("Position: " + temp2.getPosX() + " " + temp2.getPosY());
         System.out.println("numOrganisms: " + numOrganisms);
-        System.out.println("board[1][1]: " + board[1][1]);
+        System.out.println("board[1][1]: " + board[1][1] + "\n");
+        
+        temp2 = new Shrub(1, 1);
+        boolean success = addOrganism(temp2);
+        if(!success) {
+        	System.out.println("Could not add new Shrub. Space is already used.");
+        }
 
         System.out.println("Exiting.");
 
