@@ -38,9 +38,6 @@ public class BoardManager {
         numOrganisms = 0;
         freeCells = sizeX * sizeY;
         board = new Organism[sizeX][sizeY];
-
-        //Pass program control to simulate() function
-        simulate();
     }
 
     /**
@@ -68,7 +65,7 @@ public class BoardManager {
     	char userInput;
     	boolean correctInput;
     	
-    	Scanner input = new Scanner(System.in);
+    	Scanner input = new Scanner(System.in, "UTF-8");
     	
     	//Allow user to either use default setup, or configure the simulation.
     	System.out.println("Press 0 for default simulation settings, 1 to configure settings");

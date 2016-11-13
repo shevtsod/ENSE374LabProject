@@ -28,8 +28,20 @@ public class Fox extends Carnivore {
         */
     }
 
+    /**
+     * Check whether this Organism eats the passed in targetOrganism
+     * @param targetOrganism the Organism to check against this Organism
+     * @return true if this Organism can eat the targetOrganism, false otherwise.
+     */
     public boolean eats(TypeOrganism targetOrganism) {
-        //TODO: Add eats()
-        return true;
+        switch(targetOrganism) {
+            case Squirrel:
+            case Rabbit:
+            case Bluejay:
+            case Mouse:
+                return true;
+            default:
+                return false;
+        }
     }
 }

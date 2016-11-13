@@ -28,8 +28,18 @@ public class Hawk extends Carnivore {
         */
     }
 
+    /**
+     * Check whether this Organism eats the passed in targetOrganism
+     * @param targetOrganism the Organism to check against this Organism
+     * @return true if this Organism can eat the targetOrganism, false otherwise.
+     */
     public boolean eats(TypeOrganism targetOrganism) {
-        //TODO: Add eats()
-        return true;
+        switch(targetOrganism) {
+            case Mouse:
+            case Squirrel:
+                return true;
+            default:
+                return false;
+        }
     }
 }

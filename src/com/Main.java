@@ -1,4 +1,5 @@
-package com;/*
+package com;
+/*
  * FILENAME:        Main.java
  * COURSE:          ENSE 374
  * AUTHOR:          Daniel Shevtsov
@@ -42,7 +43,7 @@ public class Main {
     			"\n*****************************************************************\n"
     			);
 
-        Scanner input = new Scanner(System.in);
+        Scanner input = new Scanner(System.in, "UTF-8");
 
         // Get number of horizontal cells from 5 to 20 from keyboard input
         System.out.println("Enter number of horizontal cells (5 to 20): ");
@@ -99,8 +100,9 @@ public class Main {
                 sizeX + " x " + sizeY + ")"
         );
 
-        //Pass control of the program to the BoardManager
         BoardManager mainBM = new BoardManager(sizeX, sizeY);
+        //Pass control of the program to the BoardManager
+        mainBM.simulate();
         
         input.close();
     }

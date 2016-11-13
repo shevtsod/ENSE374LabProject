@@ -17,7 +17,7 @@ public abstract class Animal implements Organism {
     protected int maxHunger;
     private int currentHunger;
     protected TypeOrganism organism;
-    protected TypeDiet diet;
+    protected TypeDiet diet = null;
 
     /**
      * Constructor for Animal - initializes member variables.
@@ -58,6 +58,16 @@ public abstract class Animal implements Organism {
      */
     public void addHunger() {
         currentHunger++;
+    }
+
+    /**
+     * Decreases this Animal's hunger. Call if this Animal just ate another
+     * Organism.
+     */
+    public void reduceHunger() {
+        currentHunger--;
+        if(currentHunger < 0)
+            currentHunger = 0;
     }
 
     /**
