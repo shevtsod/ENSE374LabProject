@@ -28,10 +28,6 @@ public class Rabbit extends Herbivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Rabbit;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

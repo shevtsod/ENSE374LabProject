@@ -28,10 +28,6 @@ public class Wolf extends Carnivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Wolf;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

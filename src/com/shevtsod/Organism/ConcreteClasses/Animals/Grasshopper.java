@@ -28,10 +28,6 @@ public class Grasshopper extends Herbivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Grasshopper;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

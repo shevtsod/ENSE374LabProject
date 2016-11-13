@@ -28,10 +28,6 @@ public class Hawk extends Carnivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Hawk;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

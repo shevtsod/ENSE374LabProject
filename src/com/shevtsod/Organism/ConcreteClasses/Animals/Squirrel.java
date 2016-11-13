@@ -28,10 +28,6 @@ public class Squirrel extends Herbivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Squirrel;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

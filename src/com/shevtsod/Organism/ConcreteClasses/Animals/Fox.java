@@ -28,10 +28,6 @@ public class Fox extends Carnivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Fox;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

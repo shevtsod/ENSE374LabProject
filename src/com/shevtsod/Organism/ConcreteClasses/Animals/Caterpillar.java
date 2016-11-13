@@ -28,10 +28,6 @@ public class Caterpillar extends Herbivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Caterpillar;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

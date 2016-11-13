@@ -20,20 +20,11 @@ public class Tree extends Vegetation {
     public Tree(int posX, int posY) {
         super(posX, posY);
         organism = TypeOrganism.Tree;
-
-        //The parameters below can be changed to different integer values.
-        /*
-        this.speed = 3;
-        this.maxHunger = 5;
-        */
-    }
-
-    public TypeOrganism getType() {
-        return TypeOrganism.Tree;
     }
 
     public boolean eats(TypeOrganism targetOrganism) {
-        //TODO: Add eats()
-        return true;
+        // We have not defined plants to eat anything in the current version.
+        // Currently returns false for any organism, but can be extended.
+        return false;
     }
 }

@@ -28,10 +28,6 @@ public class Deer extends Herbivore {
         */
     }
 
-    public TypeOrganism getType() {
-        return TypeOrganism.Deer;
-    }
-
     public boolean eats(TypeOrganism targetOrganism) {
         //TODO: Add eats()
         return true;

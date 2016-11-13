@@ -20,20 +20,11 @@ public class Grass extends Vegetation {
     public Grass(int posX, int posY) {
         super(posX, posY);
         organism = TypeOrganism.Grass;
-
-        //The parameters below can be changed to different integer values.
-        /*
-        this.speed = 3;
-        this.maxHunger = 5;
-        */
-    }
-
-    public TypeOrganism getType() {
-        return TypeOrganism.Grass;
     }
 
     public boolean eats(TypeOrganism targetOrganism) {
-        //TODO: Add eats()
-        return true;
+        // We have not defined plants to eat anything in the current version.
+        // Currently returns false for any organism, but can be extended.
+        return false;
     }
 }
