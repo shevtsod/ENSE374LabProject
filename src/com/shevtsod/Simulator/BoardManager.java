@@ -44,7 +44,8 @@ public class BoardManager {
      * Adds any class that implements Organism to the board of organisms in
      * the simulation. Returns false if organism cannot be added.
      * @param targetOrganism An object inheriting from Organism
-     * @return true if Organism was added
+     * @return true if Organism was added successfully
+     * false if an error occurred (i.e. space is already occupied)
      */
     public boolean addOrganism(Organism targetOrganism) {
     	//If there is already an organism in this cell, return false.
@@ -79,6 +80,9 @@ public class BoardManager {
     			System.out.println("ERROR: Invalid action");
     		}
     	} while(!correctInput);
+
+        //If userInput = 1 = configure settings, enter configuration menu,
+        //otherwise load defaults
     	
         //TODO: Remove debug comments, implement simulate()
         //Test that everything works up to this point
@@ -97,6 +101,8 @@ public class BoardManager {
         System.out.println("Position: " + temp.getPosX() + " " + temp.getPosY());
         System.out.println("numOrganisms: " + numOrganisms);
         System.out.println("board[0][0]: " + board[0][0] + "\n");
+        temp.move(sizeX, sizeY);
+        System.out.println("after move(): " + temp.getPosX() + " " + temp.getPosY());
 
         Vegetation temp2 = new Shrub(1, 1);
         addOrganism(temp2);

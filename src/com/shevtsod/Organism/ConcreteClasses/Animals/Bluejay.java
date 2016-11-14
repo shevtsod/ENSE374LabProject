@@ -29,7 +29,14 @@ public class Bluejay extends Omnivore {
     }
 
     public boolean eats(TypeOrganism targetOrganism) {
-        //TODO: Add eats()
-        return true;
+        switch(targetOrganism) {
+            case Tree:
+            case Shrub:
+            case Caterpillar:
+            case Grasshopper:
+                return true;
+            default:
+                return false;
+        }
     }
 }

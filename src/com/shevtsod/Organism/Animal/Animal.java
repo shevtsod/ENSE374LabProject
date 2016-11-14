@@ -2,6 +2,8 @@ package com.shevtsod.Organism.Animal;
 
 import com.shevtsod.Organism.*;
 
+import java.util.Random;
+
 /**
  * <p>
  *     A generic animal for the animal habitat simulator. Cannot be
@@ -41,7 +43,19 @@ public abstract class Animal implements Organism {
      * @param maxY maximum y coordinate allowed
      */
     public void move(int maxX, int maxY) {
-        //TODO: Add move()
+        // Generate random x and y in range [-speed, speed]
+        // If random number is less than [0, 0] or greater than [maxX, maxY],
+        // random again.
+        // TODO: This algorithm could probably be improved for performance
+        int posXOld = posX;
+        int posYOld = posY;
+        do {
+            Random rand = new Random();
+            posX = rand.nextInt(speed * 2 + 1) - speed; //Between -speed and speed
+            posY = rand.nextInt(speed * 2 + 1) - speed;
+        } while(posX < 0 || posX >= maxX ||
+                posY < 0 || posY >= maxY ||
+                posX == posXOld || posY == posYOld);
     }
 
     /**
