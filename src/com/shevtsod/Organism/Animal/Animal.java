@@ -46,7 +46,9 @@ public abstract class Animal implements Organism {
         // Generate random x and y in range [-speed, speed]
         // If random number is less than [0, 0] or greater than [maxX, maxY],
         // random again.
-        // TODO: This algorithm could probably be improved for performance
+        //
+        // NOTE: This algorithm could probably be improved for performance
+        //       At the moment, it simply randomizes until a good value is found.
         int posXOld = posX;
         int posYOld = posY;
         do {

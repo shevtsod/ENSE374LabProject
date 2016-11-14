@@ -27,7 +27,9 @@ public class Main {
      */
     public static void main(String args[]) {
         int     sizeX = 0,
-                sizeY = 0;
+                sizeY = 0,
+                min = 3,
+                max = 10;
         boolean correctInput;
         
     	//Print welcome screen.
@@ -45,51 +47,51 @@ public class Main {
 
         Scanner input = new Scanner(System.in, "UTF-8");
 
-        // Get number of horizontal cells from 5 to 20 from keyboard input
-        System.out.println("Enter number of horizontal cells (5 to 20): ");
+        // Get number of horizontal cells from min to max from keyboard input
+        System.out.println("Enter number of horizontal cells (" + min + " to " + max + "): ");
         correctInput = false;
         do {
             System.out.print("INPUT: ");
             try {
                 sizeX = input.nextInt();
-                if(sizeX >= 5 && sizeX <= 20) {
+                if(sizeX >= min && sizeX <= max) {
                     correctInput = true;
                 } else {
                     System.out.println(
                             "ERROR: The value given for number of horizontal cells " +
-                                    "must be between 0 and 20"
+                                    "must be between 3 and 10"
                     );
                     input.nextLine();
                 }
             } catch(InputMismatchException e) {
                 System.out.println(
                         "ERROR: The value given for number of horizontal cells " +
-                                "must be between 0 and 20"
+                                "must be between 3 and 10"
                 );
                 input.nextLine();
             }
         } while(!correctInput);
 
-        // Get number of vertical cells from 5 to 20 from keyboard input
-        System.out.println("Enter number of vertical cells (5 to 20): ");
+        // Get number of vertical cells from min to max from keyboard input
+        System.out.println("Enter number of vertical cells (" + min + " to " + max + "): ");
         correctInput = false;
         do {
             System.out.print("INPUT: ");
             try {
                 sizeY = input.nextInt();
-                if(sizeY >= 5 && sizeY <= 20) {
+                if(sizeY >= min && sizeY <= max) {
                     correctInput = true;
                 } else {
                     System.out.println(
                             "ERROR: The value given for number of vertical " +
-                                    "cells must be between 0 and 20"
+                                    "cells must be between " + min + " and " + max
                     );
                     input.nextLine();
                 }
             } catch(InputMismatchException e) {
                 System.out.println(
                         "ERROR: The value given for number of vertical cells " +
-                                "must be between 0 and 20"
+                                "must be between " + min + " and " + max
                 );
                 input.nextLine();
             }

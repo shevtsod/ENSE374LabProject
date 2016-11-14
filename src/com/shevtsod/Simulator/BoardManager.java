@@ -81,8 +81,13 @@ public class BoardManager {
     		}
     	} while(!correctInput);
 
-        //If userInput = 1 = configure settings, enter configuration menu,
-        //otherwise load defaults
+        if(userInput == '1') {
+            //Enter configuration menu
+        } else {
+            //Load defaults
+        }
+
+        printBoard();
     	
         //TODO: Remove debug comments, implement simulate()
         //Test that everything works up to this point
@@ -128,6 +133,40 @@ public class BoardManager {
      * called by the class.
      */
     private void printBoard() {
-        //TODO: Add printBoard()
+        //Print first line (divider)
+        for(int i = 0; i < sizeX * 2 + 1; i++) {
+            if(i%2 != 0) {
+                System.out.print("-");
+            } else {
+                System.out.print("+");
+            }
+        }
+        System.out.println("");
+
+        //Iterate through the board and print each cell separated by lines
+        for(int i = 0; i < sizeY * 2; i++) {
+            //Vertical (rows)
+            //Print an initial + divider
+            System.out.print("+");
+            for(int j = 0; j < sizeX * 2 - 1; j++) {
+                //Horizontal (individual row)
+                if(j % 2 != 0 && i %2 != 0) {
+                    //If j and i are odd, print a divider +
+                    System.out.print("+");
+                } else if(j % 2 != 0) {
+                    //If j is odd, print a divider |
+                    System.out.print("|");
+                } else if(i % 2 != 0) {
+                    //If i is odd, print a divider -
+                    System.out.print("-");
+                } else {
+                    //Otherwise, print value in this cell
+                    System.out.print("X");
+                }
+            }
+            //Print a final + divider
+            System.out.println("+");
+        }
+        System.out.println("");
     }
 }
