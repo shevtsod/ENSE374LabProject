@@ -32,7 +32,7 @@ public abstract class Animal implements Organism {
         this.currentHunger = 0;
 
         //The properties below may be overriden by children's constructors.
-        this.speed = 3;
+        this.speed = 2;
         this.maxHunger = 5;
     }
 

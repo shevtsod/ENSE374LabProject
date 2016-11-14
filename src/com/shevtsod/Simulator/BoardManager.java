@@ -3,6 +3,8 @@ package com.shevtsod.Simulator;
 import com.shevtsod.Organism.ConcreteClasses.Animals.*;
 import com.shevtsod.Organism.ConcreteClasses.Vegetation.*;
 
+import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 import com.shevtsod.Organism.*;
@@ -48,11 +50,12 @@ public class BoardManager {
      * false if an error occurred (i.e. space is already occupied)
      */
     public boolean addOrganism(Organism targetOrganism) {
-    	//If there is already an organism in this cell, return false.
+    	// If there is already an organism in this cell, return false
     	if(board[targetOrganism.getPosX()][targetOrganism.getPosY()] != null) {
     		return false;
     	}
-    	
+
+    	// Otherwise, add this organism to the requested cell
     	board[targetOrganism.getPosX()][targetOrganism.getPosY()] = targetOrganism;
         numOrganisms++;
         return true;
@@ -63,68 +66,132 @@ public class BoardManager {
      * The program logic and simulation loop are processed here.
      */
     public void simulate() {
-    	char userInput;
+        int nUserInput = 0;
     	boolean correctInput;
     	
     	Scanner input = new Scanner(System.in, "UTF-8");
     	
-    	//Allow user to either use default setup, or configure the simulation.
+    	// Allow user to either use default setup, or configure the simulation.
     	System.out.println("Press 0 for default simulation settings, 1 to configure settings");
-    	correctInput = false;
-    	do {
-    		System.out.print("INPUT: ");
-    		userInput = input.nextLine().charAt(0);
-    		if(userInput == '0' || userInput == '1') {
-    			correctInput = true;
-    		} else {
-    			System.out.println("ERROR: Invalid action");
-    		}
-    	} while(!correctInput);
+        correctInput = false;
+        do {
+            System.out.print("INPUT: ");
+            try {
+                nUserInput = input.nextInt();
+                if(nUserInput == 0 || nUserInput == 1) {
+                    correctInput = true;
+                } else {
+                    System.out.println("ERROR: Invalid action");
+                    input.nextLine();
+                }
+            } catch(InputMismatchException e) {
+                System.out.println("ERROR: Invalid action");
+                input.nextLine();
+            }
+        } while(!correctInput);
 
-        if(userInput == '1') {
-            //Enter configuration menu
+        //Generate a random number of Organisms within bounds
+        Random rand = new Random();
+        int maxOrganisms = sizeX * sizeY;
+        //Generate between [maxOrganisms/2 to maxOrganisms] organisms
+        int organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2 + 1);
+        if(nUserInput == 1) {
+            // Enter configuration menu
+            // TODO: Add configuration menu
         } else {
-            //Load defaults
+            // Load defaults
+            System.out.println("Randomly populating board using default simulation settings");
+            while(organismsLeftToGen != 0) {
+                boolean addedSuccessfully;
+                //Add a Grass
+                do {
+                    addedSuccessfully = addOrganism(new Grass(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Shrub
+                do {
+                    addedSuccessfully = addOrganism(new Shrub(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Tree
+                do {
+                    addedSuccessfully = addOrganism(new Tree(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Bluejay
+                do {
+                    addedSuccessfully = addOrganism(new Bluejay(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Caterpillar
+                do {
+                    addedSuccessfully = addOrganism(new Caterpillar(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Deer
+                do {
+                    addedSuccessfully = addOrganism(new Deer(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Fox
+                do {
+                    addedSuccessfully = addOrganism(new Fox(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Wolf
+                do {
+                    addedSuccessfully = addOrganism(new Wolf(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Hawk
+                do {
+                    addedSuccessfully = addOrganism(new Hawk(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Grasshopper
+                do {
+                    addedSuccessfully = addOrganism(new Grasshopper(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Mouse
+                do {
+                    addedSuccessfully = addOrganism(new Mouse(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Rabbit
+                do {
+                    addedSuccessfully = addOrganism(new Rabbit(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+                //Add a Squirrel
+                do {
+                    addedSuccessfully = addOrganism(new Squirrel(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                if(--organismsLeftToGen == 0)
+                    break;
+            }
         }
 
+        // Main simulation loop
+        // TODO: Add simulation loop
         printBoard();
-    	
-        //TODO: Remove debug comments, implement simulate()
-        //Test that everything works up to this point
-        System.out.println("\nInitialized BoardManager");
-        System.out.println("sizeX: " + sizeX);
-        System.out.println("sizeY: " + sizeY);
-        System.out.println("numOrganisms: " + numOrganisms);
-        System.out.println("board[0][0]: " + board[0][0]);
-        System.out.println("board[1][1]: " + board[1][1] + "\n");
 
-        Animal temp = new Bluejay(0, 0);
-        addOrganism(temp);
-        System.out.println("\nAdded Bluejay");
-        System.out.println("TypeOrganism: " + temp.getOrganism());
-        System.out.println("TypeDiet: " + temp.getDiet());
-        System.out.println("Position: " + temp.getPosX() + " " + temp.getPosY());
-        System.out.println("numOrganisms: " + numOrganisms);
-        System.out.println("board[0][0]: " + board[0][0] + "\n");
-        temp.move(sizeX, sizeY);
-        System.out.println("after move(): " + temp.getPosX() + " " + temp.getPosY());
-
-        Vegetation temp2 = new Shrub(1, 1);
-        addOrganism(temp2);
-        System.out.println("\nAdded Shrub");
-        System.out.println("TypeOrganism: " + temp2.getOrganism());
-        System.out.println("Position: " + temp2.getPosX() + " " + temp2.getPosY());
-        System.out.println("numOrganisms: " + numOrganisms);
-        System.out.println("board[1][1]: " + board[1][1] + "\n");
-        
-        temp2 = new Shrub(1, 1);
-        boolean success = addOrganism(temp2);
-        if(!success) {
-        	System.out.println("Could not add new Shrub. Space is already used.");
-        }
+        // If reach here, simulation ended. Close program
 
         input.close();
-        System.out.println("Exiting.");
+        System.out.println("Program completed successfully. Exiting.");
 
     }
 
@@ -133,39 +200,92 @@ public class BoardManager {
      * called by the class.
      */
     private void printBoard() {
-        //Print first line (divider)
+        // Print first line (divider)
         for(int i = 0; i < sizeX * 2 + 1; i++) {
             if(i%2 != 0) {
-                System.out.print("-");
+                // If i is odd, print a divider -
+                System.out.print(" - ");
             } else {
-                System.out.print("+");
+                // Otherwise, print a divider
+                System.out.print(" . ");
             }
         }
         System.out.println("");
 
-        //Iterate through the board and print each cell separated by lines
+        // Iterate through the board and print each cell separated by lines
         for(int i = 0; i < sizeY * 2; i++) {
-            //Vertical (rows)
-            //Print an initial + divider
-            System.out.print("+");
+            // Vertical (rows)
+            // Print an initial divider
+            System.out.print(" . ");
             for(int j = 0; j < sizeX * 2 - 1; j++) {
-                //Horizontal (individual row)
+                // Horizontal (individual row)
                 if(j % 2 != 0 && i %2 != 0) {
-                    //If j and i are odd, print a divider +
-                    System.out.print("+");
+                    // If j and i are odd, print a divider
+                    System.out.print(" . ");
                 } else if(j % 2 != 0) {
-                    //If j is odd, print a divider |
-                    System.out.print("|");
+                    // If j is odd, print a divider |
+                    System.out.print(" | ");
                 } else if(i % 2 != 0) {
-                    //If i is odd, print a divider -
-                    System.out.print("-");
+                    // If i is odd, print a divider -
+                    System.out.print(" - ");
                 } else {
-                    //Otherwise, print value in this cell
-                    System.out.print("X");
+                    // Otherwise, print value in this cell
+                    if(board[j / 2][i / 2] == null) {
+                        // If no Organism here, print empty space
+                        System.out.print("   ");
+                    } else {
+                        // If Organism here, print icon for it
+                        String organismIcon;
+                        switch (board[j / 2][i / 2].getOrganism()) {
+                            case Bluejay:
+                                organismIcon = " B ";
+                                break;
+                            case Caterpillar:
+                                organismIcon = " C ";
+                                break;
+                            case Deer:
+                                organismIcon = " D ";
+                                break;
+                            case Fox:
+                                organismIcon = " F ";
+                                break;
+                            case Wolf:
+                                organismIcon = " W ";
+                                break;
+                            case Hawk:
+                                organismIcon = " H ";
+                                break;
+                            case Grasshopper:
+                                organismIcon = " G ";
+                                break;
+                            case Mouse:
+                                organismIcon = " M ";
+                                break;
+                            case Rabbit:
+                                organismIcon = " R ";
+                                break;
+                            case Squirrel:
+                                organismIcon = " S ";
+                                break;
+                            case Grass:
+                                organismIcon = " g ";
+                                break;
+                            case Shrub:
+                                organismIcon = " s ";
+                                break;
+                            case Tree:
+                                organismIcon = " t ";
+                                break;
+                            default:
+                                organismIcon = " ? ";
+                                break;
+                        }
+                        System.out.print(organismIcon);
+                    }
                 }
             }
-            //Print a final + divider
-            System.out.println("+");
+            // Print a final divider
+            System.out.println(" . ");
         }
         System.out.println("");
     }
