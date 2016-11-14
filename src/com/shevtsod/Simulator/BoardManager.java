@@ -25,7 +25,7 @@ public class BoardManager {
     private int sizeX;
     private int sizeY;
     private int numOrganisms;
-    private int freeCells;
+    private int organismsLeftToGen;
     private Organism[][] board;
 
     /**
@@ -38,7 +38,7 @@ public class BoardManager {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         numOrganisms = 0;
-        freeCells = sizeX * sizeY;
+        organismsLeftToGen = 0;
         board = new Organism[sizeX][sizeY];
     }
 
@@ -59,6 +59,144 @@ public class BoardManager {
     	board[targetOrganism.getPosX()][targetOrganism.getPosY()] = targetOrganism;
         numOrganisms++;
         return true;
+    }
+
+    /**
+     * Helper function to create the Organism with the specified TypeOrganism
+     * with random x and y coordinates and add to the board.
+     * @param organism TypeOrganism to create an Organism of
+     */
+    private void randomlyPlaceOrganism(TypeOrganism organism) {
+        Random rand = new Random();
+        if(organismsLeftToGen <= 0)
+            return;
+
+        boolean addedSuccessfully;
+        switch(organism) {
+            case Grass:
+                //Add a Grass
+                do {
+                    addedSuccessfully = addOrganism(new Grass(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Shrub:
+                //Add a Shrub
+                do {
+                    addedSuccessfully = addOrganism(new Shrub(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Tree:
+                //Add a Tree
+                do {
+                    addedSuccessfully = addOrganism(new Tree(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Bluejay:
+                //Add a Bluejay
+                do {
+                    addedSuccessfully = addOrganism(new Bluejay(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Caterpillar:
+                //Add a Caterpillar
+                do {
+                    addedSuccessfully = addOrganism(new Caterpillar(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Deer:
+                //Add a Deer
+                do {
+                    addedSuccessfully = addOrganism(new Deer(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Fox:
+                //Add a Fox
+                do {
+                    addedSuccessfully = addOrganism(new Fox(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Wolf:
+                //Add a Wolf
+                do {
+                    addedSuccessfully = addOrganism(new Wolf(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Hawk:
+                //Add a Hawk
+                do {
+                    addedSuccessfully = addOrganism(new Hawk(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Grasshopper:
+                //Add a Grasshopper
+                do {
+                    addedSuccessfully = addOrganism(new Grasshopper(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Mouse:
+                //Add a Mouse
+                do {
+                    addedSuccessfully = addOrganism(new Mouse(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Rabbit:
+                //Add a Rabbit
+                do {
+                    addedSuccessfully = addOrganism(new Rabbit(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+            case Squirrel:
+                //Add a Squirrel
+                do {
+                    addedSuccessfully = addOrganism(new Squirrel(rand.nextInt(sizeX), rand.nextInt(sizeY)));
+                } while (!addedSuccessfully);
+                break;
+
+            default:
+                break;
+        }
+        --organismsLeftToGen;
+    }
+
+    /**
+     * Helper function for input of number of organisms to add to simulator.
+     * Creates the number of objects requested and randomly scatters them around
+     * the board.
+     * @param input A Scanner object that processes the input
+     * @param organism The OrganismType to request input
+     * @return The int that was entered in the console as input
+     */
+    private int processOrganismInput(Scanner input, TypeOrganism organism) {
+        int nUserInput = 0;
+        boolean correctInput;
+        System.out.println("You have " + organismsLeftToGen + " organisms left to add");
+        System.out.println("Enter 0 to start simulation, -1 to quit program");
+        System.out.println("Enter number of " + organism.toString() + " objects to add:");
+        correctInput = false;
+        do {
+            System.out.print("INPUT: ");
+            try {
+                nUserInput = input.nextInt();
+                if(nUserInput >= -1 && nUserInput <= organismsLeftToGen) {
+                    correctInput = true;
+                } else {
+                    System.out.println("ERROR: Invalid input");
+                    input.nextLine();
+                }
+            } catch(InputMismatchException e) {
+                System.out.println("ERROR: Invalid input");
+                input.nextLine();
+            }
+        } while(!correctInput);
+        if(nUserInput == -1 || nUserInput == 0) {
+            return nUserInput;
+        }
+
+        //Create objects and place them on the board
+        for(int i = 0; i < nUserInput; i++) {
+            randomlyPlaceOrganism(organism);
+        }
+        return nUserInput;
     }
 
     /**
@@ -93,95 +231,116 @@ public class BoardManager {
         //Generate a random number of Organisms within bounds
         Random rand = new Random();
         int maxOrganisms = sizeX * sizeY;
-        //Generate between [maxOrganisms/2 to maxOrganisms] organisms
-        int organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2 + 1);
         if(nUserInput == 1) {
+            //Allow generating as many Organisms as there are cells on the board.
+            organismsLeftToGen = sizeX * sizeY;
             // Enter configuration menu
+            System.out.println("*** CONFIGURATION MENU ***");
             // TODO: Add configuration menu
+            while(organismsLeftToGen != 0) {
+                //Add Grass
+                nUserInput = processOrganismInput(input, TypeOrganism.Grass);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Shrub
+                nUserInput = processOrganismInput(input, TypeOrganism.Shrub);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Tree
+                nUserInput = processOrganismInput(input, TypeOrganism.Tree);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Bluejay
+                nUserInput = processOrganismInput(input, TypeOrganism.Bluejay);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Caterpillar
+                nUserInput = processOrganismInput(input, TypeOrganism.Caterpillar);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Deer
+                nUserInput = processOrganismInput(input, TypeOrganism.Deer);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Fox
+                nUserInput = processOrganismInput(input, TypeOrganism.Fox);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Wolf
+                nUserInput = processOrganismInput(input, TypeOrganism.Wolf);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Hawk
+                nUserInput = processOrganismInput(input, TypeOrganism.Hawk);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Grasshopper
+                nUserInput = processOrganismInput(input, TypeOrganism.Grasshopper);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Mouse
+                nUserInput = processOrganismInput(input, TypeOrganism.Mouse);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Rabbit
+                nUserInput = processOrganismInput(input, TypeOrganism.Rabbit);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+                //Add Squirrel
+                nUserInput = processOrganismInput(input, TypeOrganism.Squirrel);
+                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+                    break;
+                }
+            } // End while
         } else {
+            //Generate between [maxOrganisms/2 to maxOrganisms] organisms
+            organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2 + 1);
             // Load defaults
             System.out.println("Randomly populating board using default simulation settings");
             while(organismsLeftToGen != 0) {
-                boolean addedSuccessfully;
-                //Add a Grass
-                do {
-                    addedSuccessfully = addOrganism(new Grass(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Shrub
-                do {
-                    addedSuccessfully = addOrganism(new Shrub(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Tree
-                do {
-                    addedSuccessfully = addOrganism(new Tree(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Bluejay
-                do {
-                    addedSuccessfully = addOrganism(new Bluejay(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Caterpillar
-                do {
-                    addedSuccessfully = addOrganism(new Caterpillar(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Deer
-                do {
-                    addedSuccessfully = addOrganism(new Deer(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Fox
-                do {
-                    addedSuccessfully = addOrganism(new Fox(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Wolf
-                do {
-                    addedSuccessfully = addOrganism(new Wolf(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Hawk
-                do {
-                    addedSuccessfully = addOrganism(new Hawk(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Grasshopper
-                do {
-                    addedSuccessfully = addOrganism(new Grasshopper(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Mouse
-                do {
-                    addedSuccessfully = addOrganism(new Mouse(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Rabbit
-                do {
-                    addedSuccessfully = addOrganism(new Rabbit(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-                //Add a Squirrel
-                do {
-                    addedSuccessfully = addOrganism(new Squirrel(rand.nextInt(sizeX), rand.nextInt(sizeY)));
-                } while (!addedSuccessfully);
-                if(--organismsLeftToGen == 0)
-                    break;
-            }
+                //Add Shrub
+                randomlyPlaceOrganism(TypeOrganism.Shrub);
+                //Add Tree
+                randomlyPlaceOrganism(TypeOrganism.Tree);
+                //Add Bluejay
+                randomlyPlaceOrganism(TypeOrganism.Bluejay);
+                //Add Caterpillar
+                randomlyPlaceOrganism(TypeOrganism.Caterpillar);
+                //Add Deer
+                randomlyPlaceOrganism(TypeOrganism.Deer);
+                //Add Fox
+                randomlyPlaceOrganism(TypeOrganism.Fox);
+                //Add Wolf
+                randomlyPlaceOrganism(TypeOrganism.Wolf);
+                //Add Hawk
+                randomlyPlaceOrganism(TypeOrganism.Hawk);
+                //Add Grasshopper
+                randomlyPlaceOrganism(TypeOrganism.Grasshopper);
+                //Add Mouse
+                randomlyPlaceOrganism(TypeOrganism.Mouse);
+                //Add Rabbit
+                randomlyPlaceOrganism(TypeOrganism.Rabbit);
+                //Add Squirrel
+                randomlyPlaceOrganism(TypeOrganism.Squirrel);
+            } // End while
+        } // End if-else
+
+        if(nUserInput == -1) {
+            input.close();
+            System.out.println("Program completed successfully. Exiting.");
+            return;
         }
 
         // Main simulation loop
@@ -193,7 +352,7 @@ public class BoardManager {
         input.close();
         System.out.println("Program completed successfully. Exiting.");
 
-    }
+    }   //End simulate()
 
     /**
      * Prints the current board visually to the console. Can only be
@@ -288,5 +447,5 @@ public class BoardManager {
             System.out.println(" . ");
         }
         System.out.println("");
-    }
+    } //End printBoard()
 }
