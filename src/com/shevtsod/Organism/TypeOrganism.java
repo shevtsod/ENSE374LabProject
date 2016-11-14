@@ -22,36 +22,42 @@ public enum TypeOrganism {
     Shrub,
     Tree;
 
-    public String toString(TypeOrganism organism) {
+
+    /**
+     * Returns an icon for printing any TypeOrganism to the screen
+     * @param organism The TypeOrganism for which to get the icon
+     * @return String icon to represent this TypeOrganism
+     */
+    public static char getIcon(TypeOrganism organism) {
         switch(organism) {
             case Bluejay:
-                return "Bluejay";
+                return 'B';
             case Caterpillar:
-                return "Caterpillar";
+                return 'C';
             case Deer:
-                return "Deer";
+                return 'D';
             case Fox:
-                return "Fox";
+                return 'F';
             case Wolf:
-                return "Wolf";
+                return 'W';
             case Hawk:
-                return "Hawk";
+                return 'H';
             case Grasshopper:
-                return "Grasshopper";
+                return 'G';
             case Mouse:
-                return "Mouse";
+                return 'M';
             case Rabbit:
-                return "Rabbit";
+                return 'R';
             case Squirrel:
-                return "Squirrel";
+                return 'S';
             case Grass:
-                return "Grass";
+                return 'g';
             case Shrub:
-                return "Shrub";
+                return 's';
             case Tree:
-                return "Tree";
+                return 't';
             default:
-                return "Unknown";
+                return '?';
         }
     }
 }

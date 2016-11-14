@@ -42,6 +42,7 @@ public class BoardManager {
         board = new Organism[sizeX][sizeY];
     }
 
+
     /**
      * Adds any class that implements Organism to the board of organisms in
      * the simulation. Returns false if organism cannot be added.
@@ -60,6 +61,7 @@ public class BoardManager {
         numOrganisms++;
         return true;
     }
+
 
     /**
      * Helper function to create the Organism with the specified TypeOrganism
@@ -158,6 +160,7 @@ public class BoardManager {
         --organismsLeftToGen;
     }
 
+
     /**
      * Helper function for input of number of organisms to add to simulator.
      * Creates the number of objects requested and randomly scatters them around
@@ -170,17 +173,17 @@ public class BoardManager {
         int nUserInput = 0;
         boolean correctInput;
         System.out.println("You have " + organismsLeftToGen + " organisms left to add");
-        System.out.println("Enter 0 to start simulation, -1 to quit program");
+        System.out.println("Enter -2 to start simulation, -1 to quit program");
         System.out.println("Enter number of " + organism.toString() + " objects to add:");
         correctInput = false;
         do {
-            System.out.print("INPUT: ");
+            System.out.print("\tINPUT: ");
             try {
                 nUserInput = input.nextInt();
-                if(nUserInput >= -1 && nUserInput <= organismsLeftToGen) {
+                if(nUserInput >= -2 && nUserInput <= organismsLeftToGen) {
                     correctInput = true;
                 } else {
-                    System.out.println("ERROR: Invalid input");
+                    System.out.println("ERROR: You can only add up to " + organismsLeftToGen + " more organisms");
                     input.nextLine();
                 }
             } catch(InputMismatchException e) {
@@ -188,7 +191,7 @@ public class BoardManager {
                 input.nextLine();
             }
         } while(!correctInput);
-        if(nUserInput == -1 || nUserInput == 0) {
+        if(nUserInput == -2 || nUserInput == -1) {
             return nUserInput;
         }
 
@@ -196,8 +199,10 @@ public class BoardManager {
         for(int i = 0; i < nUserInput; i++) {
             randomlyPlaceOrganism(organism);
         }
+        System.out.println("Successfully created " + nUserInput + " " + organism.toString() + " objects");
         return nUserInput;
     }
+
 
     /**
      * Function as 'main()' for the program. 
@@ -213,7 +218,7 @@ public class BoardManager {
     	System.out.println("Press 0 for default simulation settings, 1 to configure settings");
         correctInput = false;
         do {
-            System.out.print("INPUT: ");
+            System.out.print("\tINPUT: ");
             try {
                 nUserInput = input.nextInt();
                 if(nUserInput == 0 || nUserInput == 1) {
@@ -236,122 +241,94 @@ public class BoardManager {
             organismsLeftToGen = sizeX * sizeY;
             // Enter configuration menu
             System.out.println("*** CONFIGURATION MENU ***");
-            while(organismsLeftToGen != 0) {
-                //Add Grass
-                nUserInput = processOrganismInput(input, TypeOrganism.Grass);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
+            for(TypeOrganism i : TypeOrganism.values()) {
+                nUserInput = processOrganismInput(input, i);
+                if(nUserInput == -2 || nUserInput == -1 || organismsLeftToGen == 0) {
                     break;
                 }
-                //Add Shrub
-                nUserInput = processOrganismInput(input, TypeOrganism.Shrub);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Tree
-                nUserInput = processOrganismInput(input, TypeOrganism.Tree);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Bluejay
-                nUserInput = processOrganismInput(input, TypeOrganism.Bluejay);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Caterpillar
-                nUserInput = processOrganismInput(input, TypeOrganism.Caterpillar);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Deer
-                nUserInput = processOrganismInput(input, TypeOrganism.Deer);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Fox
-                nUserInput = processOrganismInput(input, TypeOrganism.Fox);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Wolf
-                nUserInput = processOrganismInput(input, TypeOrganism.Wolf);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Hawk
-                nUserInput = processOrganismInput(input, TypeOrganism.Hawk);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Grasshopper
-                nUserInput = processOrganismInput(input, TypeOrganism.Grasshopper);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Mouse
-                nUserInput = processOrganismInput(input, TypeOrganism.Mouse);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Rabbit
-                nUserInput = processOrganismInput(input, TypeOrganism.Rabbit);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-                //Add Squirrel
-                nUserInput = processOrganismInput(input, TypeOrganism.Squirrel);
-                if(nUserInput == -1 || nUserInput == 0 || organismsLeftToGen == 0) {
-                    break;
-                }
-            } // End while
+            }
+            if(organismsLeftToGen <= 0) {
+                System.out.println("You have 0 organisms left to add. Starting simulation:");
+            }
         } else {
             //Generate between [maxOrganisms/2 to maxOrganisms] organisms
             organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2 + 1);
             // Load defaults
             System.out.println("Randomly populating board using default simulation settings");
-            while(organismsLeftToGen != 0) {
-                //Add Shrub
-                randomlyPlaceOrganism(TypeOrganism.Shrub);
-                //Add Tree
-                randomlyPlaceOrganism(TypeOrganism.Tree);
-                //Add Bluejay
-                randomlyPlaceOrganism(TypeOrganism.Bluejay);
-                //Add Caterpillar
-                randomlyPlaceOrganism(TypeOrganism.Caterpillar);
-                //Add Deer
-                randomlyPlaceOrganism(TypeOrganism.Deer);
-                //Add Fox
-                randomlyPlaceOrganism(TypeOrganism.Fox);
-                //Add Wolf
-                randomlyPlaceOrganism(TypeOrganism.Wolf);
-                //Add Hawk
-                randomlyPlaceOrganism(TypeOrganism.Hawk);
-                //Add Grasshopper
-                randomlyPlaceOrganism(TypeOrganism.Grasshopper);
-                //Add Mouse
-                randomlyPlaceOrganism(TypeOrganism.Mouse);
-                //Add Rabbit
-                randomlyPlaceOrganism(TypeOrganism.Rabbit);
-                //Add Squirrel
-                randomlyPlaceOrganism(TypeOrganism.Squirrel);
-            } // End while
+            for(TypeOrganism i : TypeOrganism.values()) {
+                if(organismsLeftToGen <= 0)
+                    break;
+                else
+                    randomlyPlaceOrganism(i);
+            }
         } // End if-else
 
         if(nUserInput == -1) {
             input.close();
-            System.out.println("Program completed successfully. Exiting.");
+            System.out.println("Program completed successfully. Exiting");
             return;
         }
 
-        // Main simulation loop
-        // TODO: Add simulation loop
+        // Output legend with all the icons used in the board
+        System.out.println("*** LEGEND ***");
+        for(TypeOrganism i : TypeOrganism.values()) {
+            System.out.println("\t" + TypeOrganism.getIcon(i) + "\t-\t" + i.toString());
+        }
+        System.out.println();
+
+        // Begin the simulation
+        System.out.println("Starting simulation with " + numOrganisms + " organisms");
         printBoard();
+
+        // Main simulation loop
+        nUserInput = 1;
+        while(nUserInput != 0) {
+            System.out.println("Press 0 to exit the program. Press any other key to simulate a day");
+            System.out.print("\tINPUT: ");
+            try {
+                nUserInput = input.nextInt();
+            } catch (InputMismatchException e) {
+                nUserInput = 1;
+            }
+            if (nUserInput == 0) {
+                System.out.println("Simulation ended successfully - terminated by user");
+                break;
+            }
+
+            //Move all animals, process hunger, print log, then print board
+            //If iterateThroughBoard returned false, end simulation
+            nUserInput = iterateThroughBoard() ? 1 : 0;
+            printBoard();
+
+            if(nUserInput == 0)
+                System.out.println("Simulation ended successfully - nothing left to simulate");
+        }
 
         // If reach here, simulation ended. Close program
 
         input.close();
-        System.out.println("Program completed successfully. Exiting.");
+        System.out.println("Program completed successfully. Exiting");
 
     }   //End simulate()
+
+    /**
+     * Helper function to iterate through the board, moving  objects and
+     * processing the logic of Organisms eating other Organisms or dying of
+     * starvation. Also checks whether the simulation can continue or if it ended
+     * (i.e. if board is empty or no animals remain)
+     * Outputs a log of what happened during the iteration.
+     * Assuming that one iteration is 'a day' of simulation.
+     * @return true if simulation can continue, false if simulation ended
+     */
+    private boolean iterateThroughBoard() {
+        //If no Organisms at all, simulation is over.
+        if(numOrganisms <= 0) {
+            return false;
+        }
+
+        boolean noAnimalsLeft = true;
+        return true;
+    }
 
     /**
      * Prints the current board visually to the console. Can only be
@@ -368,7 +345,7 @@ public class BoardManager {
                 System.out.print(" . ");
             }
         }
-        System.out.println("");
+        System.out.println();
 
         // Iterate through the board and print each cell separated by lines
         for(int i = 0; i < sizeY * 2; i++) {
@@ -393,58 +370,13 @@ public class BoardManager {
                         System.out.print("   ");
                     } else {
                         // If Organism here, print icon for it
-                        String organismIcon;
-                        switch (board[j / 2][i / 2].getOrganism()) {
-                            case Bluejay:
-                                organismIcon = " B ";
-                                break;
-                            case Caterpillar:
-                                organismIcon = " C ";
-                                break;
-                            case Deer:
-                                organismIcon = " D ";
-                                break;
-                            case Fox:
-                                organismIcon = " F ";
-                                break;
-                            case Wolf:
-                                organismIcon = " W ";
-                                break;
-                            case Hawk:
-                                organismIcon = " H ";
-                                break;
-                            case Grasshopper:
-                                organismIcon = " G ";
-                                break;
-                            case Mouse:
-                                organismIcon = " M ";
-                                break;
-                            case Rabbit:
-                                organismIcon = " R ";
-                                break;
-                            case Squirrel:
-                                organismIcon = " S ";
-                                break;
-                            case Grass:
-                                organismIcon = " g ";
-                                break;
-                            case Shrub:
-                                organismIcon = " s ";
-                                break;
-                            case Tree:
-                                organismIcon = " t ";
-                                break;
-                            default:
-                                organismIcon = " ? ";
-                                break;
-                        }
-                        System.out.print(organismIcon);
+                        System.out.print(" " + TypeOrganism.getIcon(board[j/2][i/2].getOrganism()) +" ");
                     }
                 }
             }
             // Print a final divider
             System.out.println(" . ");
         }
-        System.out.println("");
+        System.out.println();
     } //End printBoard()
 }

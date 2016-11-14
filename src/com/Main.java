@@ -51,7 +51,7 @@ public class Main {
         System.out.println("Enter number of horizontal cells (" + min + " to " + max + "): ");
         correctInput = false;
         do {
-            System.out.print("INPUT: ");
+            System.out.print("\tINPUT: ");
             try {
                 sizeX = input.nextInt();
                 if(sizeX >= min && sizeX <= max) {
@@ -76,7 +76,7 @@ public class Main {
         System.out.println("Enter number of vertical cells (" + min + " to " + max + "): ");
         correctInput = false;
         do {
-            System.out.print("INPUT: ");
+            System.out.print("\tINPUT: ");
             try {
                 sizeY = input.nextInt();
                 if(sizeY >= min && sizeY <= max) {
