@@ -236,7 +236,6 @@ public class BoardManager {
             organismsLeftToGen = sizeX * sizeY;
             // Enter configuration menu
             System.out.println("*** CONFIGURATION MENU ***");
-            // TODO: Add configuration menu
             while(organismsLeftToGen != 0) {
                 //Add Grass
                 nUserInput = processOrganismInput(input, TypeOrganism.Grass);
