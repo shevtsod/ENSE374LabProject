@@ -8,6 +8,9 @@ package com.shevtsod.Organism;
  * @author Daniel Shevtsov
  */
 public enum TypeOrganism {
+    Grass,
+    Shrub,
+    Tree,
     Bluejay,
     Caterpillar,
     Deer,
@@ -17,10 +20,7 @@ public enum TypeOrganism {
     Grasshopper,
     Mouse,
     Rabbit,
-    Squirrel,
-    Grass,
-    Shrub,
-    Tree;
+    Squirrel;
 
 
     /**

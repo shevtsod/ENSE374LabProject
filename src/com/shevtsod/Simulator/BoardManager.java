@@ -366,20 +366,18 @@ public class BoardManager {
          * If at the end of the iteration, noAnimalsLeft is still true, return false
          */
 
-        for(int i = 0; i < sizeY; i++) {
+        for(int i = 0; i < sizeX; i++) {
             //Vertical (rows)
-            for(int j = 0; j < sizeX; j++) {
+            for(int j = 0; j < sizeY; j++) {
                 //Horizontal (individual row)
                 if(board[i][j] == null)
                     //No Organism in this cell
                     continue;
 
-                if(
-                        noAnimalsLeft &&
+                if(     noAnimalsLeft &&
                         board[i][j].getOrganism() != TypeOrganism.Grass &&
                         board[i][j].getOrganism() != TypeOrganism.Tree &&
-                        board[i][j].getOrganism() != TypeOrganism.Shrub
-                        ) {
+                        board[i][j].getOrganism() != TypeOrganism.Shrub) {
                     noAnimalsLeft = false;
                 }
 
@@ -395,14 +393,19 @@ public class BoardManager {
                     //Organism is alive, move it to a new cell
                     boolean moveSuccessful = false;
                     Organism org = board[i][j];
+                    board[i][j] = null;
                     int oldPosX = org.getPosX();
                     int oldPosY = org.getPosY();
 
                     while(!moveSuccessful) {
+
                         org.move(sizeX, sizeY);
+
                         if(org.getPosX() == oldPosX && org.getPosY() == oldPosY ) {
                             //If moved 0 cells, move was successful (i.e. vegetation)
+                            board[org.getPosX()][org.getPosY()] = org;
                             moveSuccessful = true;
+
                         } else if (board[org.getPosX()][org.getPosY()] == null) {
                             //If moved to an empty cell
                             System.out.println(
@@ -411,9 +414,9 @@ public class BoardManager {
                                     org.getPosX() + " , " + org.getPosY() + ")"
                             );
                             board[org.getPosX()][org.getPosY()] = org;
-                            board[oldPosX][oldPosY] = null;
                             org.addHunger();
                             moveSuccessful = true;
+
                         } else {
                             //Moved to an occupied cell
                             if(org.eats(board[org.getPosX()][org.getPosY()].getOrganism())) {
@@ -422,8 +425,6 @@ public class BoardManager {
                                                 + " , " + oldPosY + ") moves to (" +
                                                 org.getPosX() + " , " + org.getPosY() + ")"
                                 );
-                                //If org eats the Organism already in this cell, remove that
-                                //organism and reduce this one's hunger.
                                 System.out.println(
                                         org.getOrganism().toString() + " at ("  +
                                                 org.getPosX() + " , " + org.getPosY() +
@@ -431,29 +432,31 @@ public class BoardManager {
                                                 board[org.getPosX()][org.getPosY()].getOrganism().toString() +
                                                 " in the same cell"
                                 );
+                                //If org eats the Organism already in this cell, remove that
+                                //organism and reduce this one's hunger
                                 board[org.getPosX()][org.getPosY()] = org;
-                                board[oldPosX][oldPosY] = null;
                                 org.reduceHunger();
-                                moveSuccessful = true;
                                 numOrganisms--;
+                                moveSuccessful = true;
+
                             } else if(board[org.getPosX()][org.getPosY()].eats(org.getOrganism())) {
                                 System.out.println(
                                         org.getOrganism().toString() + " at (" + oldPosX
                                                 + " , " + oldPosY + ") moves to (" +
                                                 org.getPosX() + ", " + org.getPosY() + ")"
                                 );
-                                //If Organism already in this cell eats org, remove org and
-                                //reduce the hunger of the Organism in the cell
                                 System.out.println(
                                         board[org.getPosX()][org.getPosY()].getOrganism().toString() +
                                                 " at ("  + org.getPosX() + " , " + org.getPosY() +
                                                 ") eats " +  org.getOrganism().toString()
                                                 + " in the same cell"
                                 );
+                                //If Organism already in this cell eats org, remove org and
+                                //reduce the hunger of the Organism in the cell
                                 board[org.getPosX()][org.getPosY()].reduceHunger();
                                 org = null;
-                                moveSuccessful = true;
                                 numOrganisms--;
+                                moveSuccessful = true;
                             }
                         } // end else
                         // If moveSuccessful is still false here, move again
@@ -461,7 +464,10 @@ public class BoardManager {
                 } //end if-else
             } //end for j
         } //end for i
-        System.out.println("There are " + numOrganisms + " Organisms left");
+        if(numOrganisms != 1)
+            System.out.println("There are " + numOrganisms + " Organisms left");
+        else
+            System.out.println("There is 1 Organism left");
         return !noAnimalsLeft;
     }
 
