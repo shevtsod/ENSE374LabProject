@@ -48,4 +48,41 @@ public abstract class Vegetation implements Organism {
     public TypeOrganism getOrganism() {
         return organism;
     }
+
+    /**
+     * Causes Vegetation to move (change its x and y positions). Call
+     * getPosX() and getPosY() after this method to retrieve the new position.
+     * @param maxX maximum x coordinate allowed
+     * @param maxY maximum y coordinate allowed
+     */
+    public void move(int maxX, int maxY) {
+        //Don't need to do anything here, since Vegetation cannot move
+        //Can be extended to create moving Vegetation, I guess
+    }
+
+    /**
+     * @return Whether or not the Vegetation is alive.
+     */
+    public boolean isAlive() {
+        //Vegetation is always alive.
+        //Can be extended to add a hunger mechanic to Vegetables
+        return true;
+    }
+
+    /**
+     * Increases this Vegetation's hunger. Call isAlive() afterwards to check
+     * whether the Vegetation is alive, or if its hunger exceeded the maximum
+     * allowed.
+     */
+    public void addHunger() {
+        //Vegetation does not have hunger, but can be extended
+    }
+
+    /**
+     * Decreases this Vegetation's hunger. Call if this Vegetation just ate another
+     * Organism.
+     */
+    public void reduceHunger() {
+        //Vegetation does not have hunger, but can be extended
+    }
 }

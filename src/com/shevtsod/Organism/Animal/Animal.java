@@ -32,7 +32,7 @@ public abstract class Animal implements Organism {
         this.currentHunger = 0;
 
         //The properties below may be overriden by children's constructors.
-        this.speed = 2;
+        this.speed = 3;
         this.maxHunger = 5;
     }
 
@@ -53,8 +53,20 @@ public abstract class Animal implements Organism {
         int posYOld = posY;
         do {
             Random rand = new Random();
-            posX = rand.nextInt(speed * 2 + 1) - speed; //Between -speed and speed
-            posY = rand.nextInt(speed * 2 + 1) - speed;
+            int speedX = rand.nextInt(speed * 2 + 1) - speed; //Between -speed and speed
+            int speedY = rand.nextInt(speed * 2 + 1) - speed;
+            posX += speedX;
+            posY += speedY;
+
+            if(posX < 0)
+                posX = 0;
+            else if (posX > maxX)
+                posX = maxX;
+
+            if(posY < 0)
+                posY = 0;
+            else if (posY > maxY)
+                posY = maxY;
         } while(posX < 0 || posX >= maxX ||
                 posY < 0 || posY >= maxY ||
                 posX == posXOld || posY == posYOld);

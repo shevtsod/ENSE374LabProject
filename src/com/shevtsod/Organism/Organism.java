@@ -17,4 +17,8 @@ public interface Organism {
     int getPosY();
     TypeOrganism getOrganism();
     boolean eats(TypeOrganism targetOrganism);
+    void move(int maxX, int maxY);
+    boolean isAlive();
+    void addHunger();
+    void reduceHunger();
 }

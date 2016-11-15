@@ -28,7 +28,7 @@ public class Main {
     public static void main(String args[]) {
         int     sizeX = 0,
                 sizeY = 0,
-                min = 3,
+                min = 2,
                 max = 10;
         boolean correctInput;
         

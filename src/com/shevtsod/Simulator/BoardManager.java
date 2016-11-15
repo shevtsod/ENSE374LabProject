@@ -22,10 +22,11 @@ import com.shevtsod.Organism.Vegetation.*;
  * @author Daniel Shevtsov
  */
 public class BoardManager {
-    private int sizeX;
-    private int sizeY;
-    private int numOrganisms;
-    private int organismsLeftToGen;
+    private int sizeX,
+                sizeY,
+                numOrganisms,
+                organismsLeftToGen,
+                simDay;
     private Organism[][] board;
 
     /**
@@ -39,6 +40,7 @@ public class BoardManager {
         this.sizeY = sizeY;
         numOrganisms = 0;
         organismsLeftToGen = 0;
+        simDay = 0;
         board = new Organism[sizeX][sizeY];
     }
 
@@ -157,7 +159,7 @@ public class BoardManager {
             default:
                 break;
         }
-        --organismsLeftToGen;
+        organismsLeftToGen--;
     }
 
 
@@ -183,7 +185,8 @@ public class BoardManager {
                 if(nUserInput >= -2 && nUserInput <= organismsLeftToGen) {
                     correctInput = true;
                 } else {
-                    System.out.println("ERROR: You can only add up to " + organismsLeftToGen + " more organisms");
+                    System.out.println("ERROR: You can only add up to " + organismsLeftToGen +
+                            " more organisms");
                     input.nextLine();
                 }
             } catch(InputMismatchException e) {
@@ -252,14 +255,16 @@ public class BoardManager {
             }
         } else {
             //Generate between [maxOrganisms/2 to maxOrganisms] organisms
-            organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2 + 1);
+            organismsLeftToGen = rand.nextInt(maxOrganisms / 2 + 1) + (maxOrganisms / 2);
             // Load defaults
             System.out.println("Randomly populating board using default simulation settings");
-            for(TypeOrganism i : TypeOrganism.values()) {
-                if(organismsLeftToGen <= 0)
-                    break;
-                else
-                    randomlyPlaceOrganism(i);
+            while(organismsLeftToGen > 0) {
+                for (TypeOrganism i : TypeOrganism.values()) {
+                    if (organismsLeftToGen <= 0)
+                        break;
+                    else
+                        randomlyPlaceOrganism(i);
+                }
             }
         } // End if-else
 
@@ -277,34 +282,48 @@ public class BoardManager {
         System.out.println();
 
         // Begin the simulation
-        System.out.println("Starting simulation with " + numOrganisms + " organisms");
+        System.out.println("Starting simulation with " + numOrganisms + " organisms\n");
         printBoard();
+        simDay++;
 
         // Main simulation loop
         nUserInput = 1;
         while(nUserInput != 0) {
-            System.out.println("Press 0 to exit the program. Press any other key to simulate a day");
-            System.out.print("\tINPUT: ");
-            try {
-                nUserInput = input.nextInt();
-            } catch (InputMismatchException e) {
-                nUserInput = 1;
-            }
-            if (nUserInput == 0) {
-                System.out.println("Simulation ended successfully - terminated by user");
-                break;
+            //If user input -1, skip the input portion (aka automatically run to completion)
+            if(nUserInput != -1) {
+                System.out.println("Press 0 to exit the program. Press -1 to auto-run simulation.\n" +
+                        "Press any other key to simulate a day");
+                System.out.print("\tINPUT: ");
+                try {
+                    nUserInput = input.nextInt();
+                } catch (InputMismatchException e) {
+                    nUserInput = 1;
+                    input.nextLine();
+                }
+                if (nUserInput == 0) {
+                    break;
+                }
             }
 
             //Move all animals, process hunger, print log, then print board
             //If iterateThroughBoard returned false, end simulation
-            nUserInput = iterateThroughBoard() ? 1 : 0;
+            nUserInput = iterateThroughBoard() ? nUserInput : 0;
+            System.out.println();
             printBoard();
 
-            if(nUserInput == 0)
-                System.out.println("Simulation ended successfully - nothing left to simulate");
+            if(numOrganisms == 0 || nUserInput == 0)
+                break;
+
+            //Record how many simulation days have passed
+            simDay++;
+            System.out.println("*****************************************************************");
         }
 
         // If reach here, simulation ended. Close program
+        System.out.println(
+                "Simulation ended successfully - nothing left to simulate\n" +
+                "Simulation ended on day " + simDay
+        );
 
         input.close();
         System.out.println("Program completed successfully. Exiting");
@@ -321,13 +340,129 @@ public class BoardManager {
      * @return true if simulation can continue, false if simulation ended
      */
     private boolean iterateThroughBoard() {
+        System.out.println("*** SIMULATION LOG - DAY " + simDay + " ***");
+
         //If no Organisms at all, simulation is over.
         if(numOrganisms <= 0) {
+            System.out.println("No organisms left");
             return false;
         }
 
         boolean noAnimalsLeft = true;
-        return true;
+
+        /*
+         * Iterate through the 2D array representing the board
+         * First, check if the cell is empty, and skip it if so.
+         * Check if the Organism is alive, and remove it otherwise.
+         * For each cell, move the Organism to a new random location within
+         * the bounds of its movement (speed, borders of board).
+         * Next, check if the destination cell is empty.
+         * *If it is empty, place this Organism into this new empty cell
+          * and increment hunger.
+         * *If it is occupied, check if any of the two Organisms eats one another
+         *      *If so, eat Organism and decrement hunger
+         *      *If not, move this Organism again, repeat until it finds a free cell
+         *       or an Organism it can eat or be eaten by
+         * If at the end of the iteration, noAnimalsLeft is still true, return false
+         */
+
+        for(int i = 0; i < sizeY; i++) {
+            //Vertical (rows)
+            for(int j = 0; j < sizeX; j++) {
+                //Horizontal (individual row)
+                if(board[i][j] == null)
+                    //No Organism in this cell
+                    continue;
+
+                if(
+                        noAnimalsLeft &&
+                        board[i][j].getOrganism() != TypeOrganism.Grass &&
+                        board[i][j].getOrganism() != TypeOrganism.Tree &&
+                        board[i][j].getOrganism() != TypeOrganism.Shrub
+                        ) {
+                    noAnimalsLeft = false;
+                }
+
+                if (!board[i][j].isAlive()) {
+                    //Organism in this cell died
+                    System.out.println(
+                            board[i][j].getOrganism().toString() +
+                            " at (" + i + " , " + j + ") has died of starvation"
+                    );
+                    board[i][j] = null;
+                    numOrganisms--;
+                } else {
+                    //Organism is alive, move it to a new cell
+                    boolean moveSuccessful = false;
+                    Organism org = board[i][j];
+                    int oldPosX = org.getPosX();
+                    int oldPosY = org.getPosY();
+
+                    while(!moveSuccessful) {
+                        org.move(sizeX, sizeY);
+                        if(org.getPosX() == oldPosX && org.getPosY() == oldPosY ) {
+                            //If moved 0 cells, move was successful (i.e. vegetation)
+                            moveSuccessful = true;
+                        } else if (board[org.getPosX()][org.getPosY()] == null) {
+                            //If moved to an empty cell
+                            System.out.println(
+                                    org.getOrganism().toString() + " at (" + oldPosX
+                                    + " , " + oldPosY + ") moves to (" +
+                                    org.getPosX() + " , " + org.getPosY() + ")"
+                            );
+                            board[org.getPosX()][org.getPosY()] = org;
+                            board[oldPosX][oldPosY] = null;
+                            org.addHunger();
+                            moveSuccessful = true;
+                        } else {
+                            //Moved to an occupied cell
+                            if(org.eats(board[org.getPosX()][org.getPosY()].getOrganism())) {
+                                System.out.println(
+                                        org.getOrganism().toString() + " at (" + oldPosX
+                                                + " , " + oldPosY + ") moves to (" +
+                                                org.getPosX() + " , " + org.getPosY() + ")"
+                                );
+                                //If org eats the Organism already in this cell, remove that
+                                //organism and reduce this one's hunger.
+                                System.out.println(
+                                        org.getOrganism().toString() + " at ("  +
+                                                org.getPosX() + " , " + org.getPosY() +
+                                                ") eats " +
+                                                board[org.getPosX()][org.getPosY()].getOrganism().toString() +
+                                                " in the same cell"
+                                );
+                                board[org.getPosX()][org.getPosY()] = org;
+                                board[oldPosX][oldPosY] = null;
+                                org.reduceHunger();
+                                moveSuccessful = true;
+                                numOrganisms--;
+                            } else if(board[org.getPosX()][org.getPosY()].eats(org.getOrganism())) {
+                                System.out.println(
+                                        org.getOrganism().toString() + " at (" + oldPosX
+                                                + " , " + oldPosY + ") moves to (" +
+                                                org.getPosX() + ", " + org.getPosY() + ")"
+                                );
+                                //If Organism already in this cell eats org, remove org and
+                                //reduce the hunger of the Organism in the cell
+                                System.out.println(
+                                        board[org.getPosX()][org.getPosY()].getOrganism().toString() +
+                                                " at ("  + org.getPosX() + " , " + org.getPosY() +
+                                                ") eats " +  org.getOrganism().toString()
+                                                + " in the same cell"
+                                );
+                                board[org.getPosX()][org.getPosY()].reduceHunger();
+                                org = null;
+                                moveSuccessful = true;
+                                numOrganisms--;
+                            }
+                        } // end else
+                        // If moveSuccessful is still false here, move again
+                    } //end while(!moveSuccessful)
+                } //end if-else
+            } //end for j
+        } //end for i
+        System.out.println("There are " + numOrganisms + " Organisms left");
+        return !noAnimalsLeft;
     }
 
     /**
@@ -335,6 +470,8 @@ public class BoardManager {
      * called by the class.
      */
     private void printBoard() {
+        System.out.println("*** SIMULATION BOARD - DAY " + simDay + " ***");
+
         // Print first line (divider)
         for(int i = 0; i < sizeX * 2 + 1; i++) {
             if(i%2 != 0) {
