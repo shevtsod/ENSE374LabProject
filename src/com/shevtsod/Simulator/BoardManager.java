@@ -402,8 +402,9 @@ public class BoardManager {
                         org.move(sizeX, sizeY);
 
                         if(org.getPosX() == oldPosX && org.getPosY() == oldPosY ) {
-                            //If moved 0 cells, move was successful (i.e. vegetation)
+                            //If moved 0 cells, move was successful (e.g. vegetation or can't move anywhere)
                             board[org.getPosX()][org.getPosY()] = org;
+                            org.addHunger();
                             moveSuccessful = true;
 
                         } else if (board[org.getPosX()][org.getPosY()] == null) {
