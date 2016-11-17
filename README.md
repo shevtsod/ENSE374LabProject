@@ -1,8 +1,12 @@
 
 # ENSE 374 Lab Project
 Animal habitat simulation project for ENSE374 lab
+
+> **Note:** This project was completed on Nov. 16, 2016.
+
 ##Overview
 >**Lab 4** - Software Design Document, UML Class Diagram, Stub Coding
+>**Lab 5** - Completed Project
 
 ##Compilation
 ###Eclipse IDE for Java Neon.1
@@ -46,6 +50,9 @@ project files in the IDE. Press `F6` to run or `Ctrl + F5` to debug.
 ##Details
 ###Lab 4 - Software Design Document, UML Class Diagram, Stub Coding
 Creation of `Software Design Document`, `UML Class Diagram`, and coding of class and method stubs for an animal habitat simulation software project.
+
+###Lab 5 - Completed Project
+Coding the rest of the program, changes to `Software Design Document`, `UML Class Diagram`, and `UML Sequence Diagram` to reflect newest version of the software, presentation of project.
 
 ---
 > Written with [StackEdit](https://stackedit.io/).
