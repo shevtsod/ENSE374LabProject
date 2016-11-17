@@ -5,7 +5,7 @@ Animal habitat simulation project for ENSE374 lab
 > **Note:** This project was completed on Nov. 16, 2016.
 
 ##Overview
->**Lab 4** - Software Design Document, UML Class Diagram, Stub Coding
+>**Lab 4** - Software Design Document, UML Class Diagram, Stub Coding  
 >**Lab 5** - Completed Project
 
 ##Compilation
