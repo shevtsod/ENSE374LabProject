@@ -2,7 +2,7 @@
 # ENSE 374 Lab Project
 Animal habitat simulation project for ENSE374 lab
 
-> **Note:** This project was completed on Nov. 16, 2016.
+> **Note:** This project was completed on Nov. 16, 2016.  
 > See `v1.0.0` release under the `Releases` tab of this repository for the JAR file.
 
 ##Overview
