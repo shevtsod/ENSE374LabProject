@@ -16,7 +16,7 @@ To compile, go to
 
 Name the project, set the `Location` of the project or keep the default, and navigate to the directory of the project in the system explorer.  
 
-Move the `src\ ` folder from this repository and merge it with the `src\ `
+Move the `src/ ` folder from this repository and merge it with the `src/ `
 directory where you created the project.  
 
 The project files should now be visible in the IDE's `Package Editor`. If not, press `F5` with the `Package Editor` highlighted to refresh the directories.  
@@ -32,12 +32,12 @@ To compile, go to
 Make sure that `Java` is selected in the list on the left side of the window.
 Click `Next`, `Next`, name the project, and `Finish`.  
 
-Move the `src\ ` folder from this repository and merge it with the `src\ ` 
+Move the `src/ ` folder from this repository and merge it with the `src\ ` 
 directory where you created the project.  
 
 Then, open the `Project` tab on the left, and expand the root folder. 
 
-Expand `src\com\Main `. In the editor window, click the green play button beside `public class Main`. There, you can choose to either run or debug the program.
+Expand `src/com/Main `. In the editor window, click the green play button beside `public class Main`. There, you can choose to either run or debug the program.
 
 ###NetBeans IDE 8.2
 To compile, go to
@@ -49,7 +49,7 @@ Click `Next`, name the project, choose a directory for the project, and click
 Right click on the default package that was created with the same name you 
 have given the project and `Delete` it.
 
-Move the `src\ ` folder from this repository and merge it with the `src\ ` 
+Move the `src/ ` folder from this repository and merge it with the `src/ ` 
 directory where you created the project. This will automatically update the 
 project files in the IDE. Press `F6` to run or `Ctrl + F5` to debug.
 
