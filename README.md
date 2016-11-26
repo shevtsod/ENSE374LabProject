@@ -14,9 +14,11 @@ Animal habitat simulation project for ENSE374 lab
 To compile, go to
 >File -> New Java Project
 
-Name the project, set the `Location` of the project or keep the default, and navigate to that directory in the system explorer.  
-Move the `src\ ` folder from this repository and merge it with the `src\ ` 
+Name the project, set the `Location` of the project or keep the default, and navigate to the directory of the project in the system explorer.  
+
+Move the `src\ ` folder from this repository and merge it with the `src\ `
 directory where you created the project.  
+
 The project files should now be visible in the IDE's `enter code here`. If not, press `F5` with the `Package Editor` highlighted to refresh the directories.  
 
 Press `Ctrl + F11` to build and run, or `F11` to build and debug.  
