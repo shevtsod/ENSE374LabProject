@@ -12,12 +12,16 @@ Animal habitat simulation project for ENSE374 lab
 ##Compilation
 ###Eclipse IDE for Java Neon.1
 To compile, go to
->File -> Open Projects from File System
+>File -> New Java Project
 
-Under `Import Source`, press `Directory` and navigate to the folder (lab1, 
-lab2, etc.). Click `Finish` to import the files as a project.
+Name the project, set the `Location` of the project or keep the default, and navigate to that directory in the system explorer.  
+Move the `src\ ` folder from this repository and merge it with the `src\ ` 
+directory where you created the project.  
+The project files should now be visible in the IDE's `enter code here`. If not, press `F5` with the `Package Editor` highlighted to refresh the directories.  
 
-Press `Ctrl + F11` to build and run, or `F11` to build and debug.
+Press `Ctrl + F11` to build and run, or `F11` to build and debug.  
+
+You may receive a window to choose how to run the application. Select `Java Application`.  
 
 ###IntelliJ IDEA 2016.2
 To compile, go to  
