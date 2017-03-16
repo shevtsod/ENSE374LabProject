@@ -53,7 +53,7 @@ directory where you created the project. This will automatically update the
 project files in the IDE. Press `F6` to run or `Ctrl + F5` to debug.
 
 
-##Details
+## Details
 ### Lab 4 - Software Design Document, UML Class Diagram, Stub Coding
 Creation of `Software Design Document`, `UML Class Diagram`, and coding of class and method stubs for an animal habitat simulation software project.
 
